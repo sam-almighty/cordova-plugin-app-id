@@ -1,0 +1,44 @@
+{
+    "name": "cordova-plugin-app-id",
+    "version": "1.0.20181009",
+    "description": "Cordova Plugin for the IBM Cloud App ID",
+    "cordova": {
+        "id": "cordova-plugin-app-id",
+        "platforms": [
+            "android",
+            "ios",
+            "windows"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://git.ng.bluemix.net/ibmmfpf/cordova-plugin-mfp-push"
+    },
+    "keywords": [
+        "cordova",
+        "ibm",
+        "worklight",
+        "mobilefirst",
+        "mfp",
+        "ecosystem:cordova",
+        "cordova-android",
+        "cordova-ios",
+        "cordova-windows"
+    ],
+    "engines": [
+        {
+            "name": "cordova-android",
+            "version": ">=5.0.0 <6"
+        },
+        {
+            "name": "cordova-ios",
+            "version": ">=4.0.1 <5"
+        },
+        {
+            "name": "cordova-plugman",
+            "version": ">=6.0.0 <7"
+        }
+    ],
+    "author": "IBM",
+    "license": "SEE LICENSE IN LICENSE.TXT"
+}

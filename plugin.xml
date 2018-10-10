@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+    Licensed Material - Property of IBM
+
+   © Copyright 2016 IBM Corp.
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+    <plugin id="cordova-plugin-app-id" version="1.0.20181009" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    	<name>IBM Cloud Platform - App Id</name>
+    	<description>IBM Cloud App ID is a service that lets developers to easily add authentication, authorization and user profile services to apps and APIs running on IBM Cloud.</description>
+
+        <platform name="android">
+            <js-module name="AppId" src="www/APPID.js">
+                <clobbers target="AppId" />
+            </js-module>
+            <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
+            <framework src="com.squareup.okhttp3:okhttp:3.11.0" />
+            <framework src="com.android.support:support-v4:26.0.1" />
+
+            <config-file target="AndroidManifest.xml" parent="/manifest">
+                <permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+                <uses-permission android:name="android.permission.INTERNET"/>
+                <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+                <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+                <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+            </config-file>
+            
+             <config-file target="AndroidManifest.xml" parent="/manifest/application">
+             <activity
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:name="com.facebook.FacebookActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+             <activity android:label="@string/app_name" android:name="com.ibm.cloud.appid.android.internal.authorizationmanager.ChromeTabActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            </config-file>
+
+            <config-file parent="/*" target="res/xml/config.xml">
+                <feature name="AppIdPlugin">
+                    <param name="android-package" value="com.ibm.appid.clientsdk.cordovaplugins.CDVAppId" />
+                </feature>
+            </config-file>
+       
+            <config-file target="res/values/strings.xml" parent="/*">
+             <string name="facebook_app_id">YOUR_APP_ID_HERE</string>
+              <string name="test">YOURETESTHERE</string>
+            </config-file>
+
+            <config-file parent="/*" target="AndroidManifest.xml" /> 
+             <lib-file src="src/android/libs/appid-clientsdk-android.jar" />
+              <lib-file src="src/android/libs/ibmmobilefirstplatformfoundation.jar" />
+              <lib-file src="src/android/libs/customtabs.jar" />
+             <lib-file src="src/android/libs/ibmmobilefirstplatformfoundation-core.jar" />
+             
+            <source-file src="src/android/CDVAppId.java"   target-dir="src/com/ibm/appid/clientsdk/cordovaplugins" />
+        </platform>
+
+        <platform name="ios">
+
+        </platform>
+
+ <platform name="windows">
+
+    </platform>
+    </plugin>

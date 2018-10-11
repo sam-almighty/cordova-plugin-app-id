@@ -51,7 +51,7 @@
 
             <config-file parent="/*" target="AndroidManifest.xml" /> 
              <lib-file src="src/android/libs/appid-clientsdk-android.jar" />
-              <lib-file src="src/android/libs/ibmmobilefirstplatformfoundation.jar" />
+              <lib-file src="src/android/libs/ibmmobilefirstplatformfoundation-analytics.jar" />
               <lib-file src="src/android/libs/customtabs.jar" />
              <lib-file src="src/android/libs/ibmmobilefirstplatformfoundation-core.jar" />
              

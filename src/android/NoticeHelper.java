@@ -42,21 +42,21 @@ public class NoticeHelper {
     public String getNoticeForState(AuthState state){
         switch(state){
             case logged_in_again:
-                return ctx.getString(R.string.logged_in_again_notice);
+                return "A known identified user logged in again. His Profile is fetched from App ID.";
             case login_back:
-                return ctx.getString(R.string.login_back_notice);
+                return "An identified user returned to the app with the same identity. The app accesses his identified profile and the previous selections that he made.";
             case logged_in_new:
-                return ctx.getString(R.string.logged_in_new_notice);
+                return "An identified user logged in for the first time. A new Profile was created on App ID. Now when he logs in with the same credentials from any device or web client, the app will show his same profile and selections.";
             case login_back_and_change_login:
-                return ctx.getString(R.string.login_back_and_change_login_notice);
+                return "The user signed back into the device with a different identity (e.g. was with Facebook, now with Google). The profile related to the identity he currenlty logged in with is now shown.";
             case new_guest:
-                return ctx.getString(R.string.new_guest_notice);
+                return "A guest user started using the app. App ID created a new anonymous profile, where the user’s selections can be stored. Note that this anonymous profile is only available from this device.";
             case progressive_auth:
-                return ctx.getString(R.string.progressive_auth_notice);
+                return "A guest user logged-in for the first time. App ID assigned this user’s identity to his anonymous profile, so his previous selections are saved. The anonymous token previously used to access this profile is now invalid.";
             case returning_guest:
-                return ctx.getString(R.string.returning_guest_notice);
+                return "A guest user returned. The app uses his existing anonymous profile, so his previous selections are shown. Note that this anonymous user profile is only available from this device.";
             case switch_to_identified:
-                return ctx.getString(R.string.switch_to_identified_notice);
+                return "A user started to use the app anonymously, made some selections, and then logged in. Since he had logged in in the past, the app switches over to his existing identified profile in place of his anonymous profile.";
             default:
                 return null;
         }

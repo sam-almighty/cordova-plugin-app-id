@@ -15,25 +15,12 @@ package com.ibm.appid.clientsdk.cordovaplugins;
 
 import com.ibm.cloud.appid.android.api.AppID;
 import com.ibm.cloud.appid.android.api.AppIDAuthorizationManager;
-import com.ibm.cloud.appid.android.api.AuthorizationException;
-import com.ibm.cloud.appid.android.api.AuthorizationListener;
 import com.ibm.cloud.appid.android.api.LoginWidget;
-import com.ibm.cloud.appid.android.api.tokens.AccessToken;
-import com.ibm.cloud.appid.android.api.tokens.IdentityToken;
-import com.ibm.cloud.appid.android.api.tokens.RefreshToken;
 
-
-
-import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
-import org.apache.cordova.PluginResult;
-
+import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.List;
-import java.util.Arrays;
 
 public class CDVAppId extends CordovaPlugin {
 
@@ -118,22 +105,9 @@ public class CDVAppId extends CordovaPlugin {
     private void login(final CallbackContext callbackContext){
         try{
             LoginWidget loginWidget = appId.getLoginWidget();
-            loginWidget.launch(this.cordova.getActivity(), new AuthorizationListener() {
-                @Override
-                public void onAuthorizationCanceled() {
-                    callbackContext.error("Cancelled");
-                }
-    
-                @Override
-                public void onAuthorizationFailure(AuthorizationException e) {
-                    callbackContext.error(e.toString());
-                }
-    
-                @Override
-                public void onAuthorizationSuccess(AccessToken accessToken, IdentityToken identityToken, RefreshToken refreshToken) {
-                    callbackContext.success(accessToken.toString());
-                }
-            }, null);
+            AppIdSampleAuthorizationListener appIdSampleAuthorizationListener =
+                    new AppIdSampleAuthorizationListener(this.cordova.getActivity(), appIDAuthorizationManager, false,callbackContext);
+            loginWidget.launch(this.cordova.getActivity(),appIdSampleAuthorizationListener, null);
         }catch(Exception e){
             callbackContext.error(e.toString());
         }

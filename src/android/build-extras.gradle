@@ -8,3 +8,8 @@ if (!project.hasProperty('cdvCompileSdkVersion') || cdvCompileSdkVersion < 27) {
     ext.cdvCompileSdkVersion = 27;
 }
 
+android {
+     defaultConfig {
+        multiDexEnabled true
+    }
+} 

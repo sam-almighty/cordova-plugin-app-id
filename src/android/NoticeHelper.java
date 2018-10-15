@@ -17,7 +17,7 @@ import android.content.Context;
 
 import com.ibm.cloud.appid.android.api.AppIDAuthorizationManager;
 
-import io.cordova.hellocordova.R;
+
 
 /**
  * A helper class for providing notifications to the sample users about the authorization process and

@@ -22,7 +22,6 @@ import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import sun.security.util.Password;
 
 public class CDVAppId extends CordovaPlugin {
 
@@ -43,7 +42,7 @@ public class CDVAppId extends CordovaPlugin {
             this.initialize(tenantId,region,callbackContext);
             return true;
         } else if ("login".equals(action)) {
-            String userName = args.getStrings(0);
+            String userName = args.getString(0);
             String password = args.getString(1);
             this.login(userName,password,callbackContext);
             return true;

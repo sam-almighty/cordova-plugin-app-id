@@ -22,6 +22,8 @@ import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import sun.security.util.Password;
+
 public class CDVAppId extends CordovaPlugin {
 
     private AppID appId;
@@ -38,10 +40,12 @@ public class CDVAppId extends CordovaPlugin {
         if ("initialize".equals(action)) {
             String tenantId = args.getString(0);
             String region = args.getString(1);
-            this.initialize(tenantId,region, callbackContext);
+            this.initialize(tenantId,region,callbackContext);
             return true;
         } else if ("login".equals(action)) {
-            this.login(callbackContext);
+            String userName = args.getStrings(0);
+            String password = args.getString(1);
+            this.login(userName,password,callbackContext);
             return true;
         }
         /* else if ("isPushSupported".equals(action)) {
@@ -102,17 +106,18 @@ public class CDVAppId extends CordovaPlugin {
     	}
     }
 
-    private void login(final CallbackContext callbackContext){
+    private void login(String userName,String password,final CallbackContext callbackContext){
         try{
-            LoginWidget loginWidget = appId.getLoginWidget();
             AppIdSampleAuthorizationListener appIdSampleAuthorizationListener =
                     new AppIdSampleAuthorizationListener(this.cordova.getActivity(), appIDAuthorizationManager, false,callbackContext);
-            loginWidget.launch(this.cordova.getActivity(),appIdSampleAuthorizationListener, null);
+            appId.signinWithResourceOwnerPassword(this.cordova.getActivity(),userName,password,appIdSampleAuthorizationListener);
+             // LoginWidget loginWidget = appId.getLoginWidget();
+            // loginWidget.launch(this.cordova.getActivity(),appIdSampleAuthorizationListener, null);
         }catch(Exception e){
             callbackContext.error(e.toString());
         }
     }
-    
+
     
     // /**
     //  * Checks whether push notification is supported.

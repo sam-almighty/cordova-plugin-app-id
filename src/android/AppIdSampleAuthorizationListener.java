@@ -58,6 +58,7 @@ public class AppIdSampleAuthorizationListener implements AuthorizationListener {
     @Override
     public void onAuthorizationSuccess(AccessToken accessToken, IdentityToken identityToken, RefreshToken refreshToken) {
         Log.i(logTag("onAuthorizationSuccess"),"Authorization succeeded");
+        tokensPersistenceManager.persistTokensOnDevice();
         callbackContext.success(accessToken.toString());
 //        if (accessToken == null && identityToken == null) {
 //            Log.i(logTag("onAuthorizationSuccess"),"Finish done flow");

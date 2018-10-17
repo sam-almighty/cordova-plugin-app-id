@@ -33,8 +33,8 @@ var APPID = {
 		}
 	},
 	
-	login: function(success, failure) {
-			cordova.exec(success, failure, "AppIdPlugin", "login");
+	login: function(success, failure,userName,password) {
+			cordova.exec(success, failure, "AppIdPlugin", "login",[userName,password]);
 	},
 	
 	/**

@@ -72,7 +72,7 @@ public class CDVAppId extends CordovaPlugin {
             if (storedRefreshToken != null && !storedRefreshToken.isEmpty()) {
                 refreshTokens(storedRefreshToken,callbackContext);
             } else {
-                callbackContext.success();
+                callbackContext.error("");
             }
     	} catch (Exception e) {
     		callbackContext.error(e.toString());

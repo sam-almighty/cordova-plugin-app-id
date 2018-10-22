@@ -59,7 +59,7 @@ public class AppIdAuthorizationListener implements AuthorizationListener {
     public void onAuthorizationSuccess(AccessToken accessToken, IdentityToken identityToken, RefreshToken refreshToken) {
         Log.i(logTag("onAuthorizationSuccess"),"Authorization succeeded");
         tokensPersistenceManager.persistTokensOnDevice();
-        callbackContext.success(accessToken.toString())
+        callbackContext.success(accessToken.toString());
     }
 
     private String logTag(String methodName){

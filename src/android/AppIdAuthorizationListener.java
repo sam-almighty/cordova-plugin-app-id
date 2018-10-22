@@ -29,14 +29,14 @@ import org.apache.cordova.CallbackContext;
  * This listener provides the callback methods that are called at the end of App ID
  * authorization process when using the {@link com.ibm.cloud.appid.android.api.AppID} login APIs
  */
-public class AppIdSampleAuthorizationListener implements AuthorizationListener {
+public class AppIdAuthorizationListener implements AuthorizationListener {
     private NoticeHelper noticeHelper;
     private TokensPersistenceManager tokensPersistenceManager;
     private boolean isAnonymous;
     private Activity activity;
     CallbackContext callbackContext;
 
-    public AppIdSampleAuthorizationListener(Activity activity, AppIDAuthorizationManager authorizationManager, boolean isAnonymous, CallbackContext callbackContext) {
+    public AppIdAuthorizationListener(Activity activity, AppIDAuthorizationManager authorizationManager, boolean isAnonymous, CallbackContext callbackContext) {
         tokensPersistenceManager = new TokensPersistenceManager(activity, authorizationManager);
         noticeHelper = new NoticeHelper(activity, authorizationManager, tokensPersistenceManager);
         this.isAnonymous = isAnonymous;
@@ -59,18 +59,7 @@ public class AppIdSampleAuthorizationListener implements AuthorizationListener {
     public void onAuthorizationSuccess(AccessToken accessToken, IdentityToken identityToken, RefreshToken refreshToken) {
         Log.i(logTag("onAuthorizationSuccess"),"Authorization succeeded");
         tokensPersistenceManager.persistTokensOnDevice();
-        callbackContext.success(accessToken.toString());
-//        if (accessToken == null && identityToken == null) {
-//            Log.i(logTag("onAuthorizationSuccess"),"Finish done flow");
-//
-//        } else {
-//            Intent intent = new Intent(activity, AfterLoginActivity.class);
-//            intent.putExtra("auth-state", noticeHelper.determineAuthState(isAnonymous));
-//            //storing the new token
-//            tokensPersistenceManager.persistTokensOnDevice();
-//            activity.startActivity(intent);
-//            activity.finish();
-//        }
+        callbackContext.success(accessToken.toString())
     }
 
     private String logTag(String methodName){

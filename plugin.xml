@@ -73,7 +73,7 @@
              <lib-file src="src/android/libs/ibmmobilefirstplatformfoundation-core.jar" />
              
             <source-file src="src/android/CDVAppId.java"   target-dir="src/com/ibm/appid/clientsdk/cordovaplugins" />
-            <source-file src="src/android/AppIdSampleAuthorizationListener.java"   target-dir="src/com/ibm/appid/clientsdk/cordovaplugins" />
+            <source-file src="src/android/AppIdAuthorizationListener.java"   target-dir="src/com/ibm/appid/clientsdk/cordovaplugins" />
             <source-file src="src/android/NoticeHelper.java"   target-dir="src/com/ibm/appid/clientsdk/cordovaplugins" />
             <source-file src="src/android/TokensPersistenceManager.java"   target-dir="src/com/ibm/appid/clientsdk/cordovaplugins" />
         </platform>

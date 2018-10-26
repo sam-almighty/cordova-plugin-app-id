@@ -70,8 +70,9 @@ public class CDVAppId extends CordovaPlugin {
             tokensPersistenceManager = new TokensPersistenceManager(this.cordova.getActivity(), appIDAuthorizationManager);
             String storedRefreshToken = tokensPersistenceManager.getStoredRefreshToken();
             if (storedRefreshToken != null && !storedRefreshToken.isEmpty()) {
-                refreshTokens(storedRefreshToken,callbackContext);
+                  refreshTokens(storedRefreshToken,callbackContext);
             } else {
+                login(callbackContext);
                // callbackContext.error("");
             }
     	} catch (Exception e) {
@@ -88,7 +89,7 @@ public class CDVAppId extends CordovaPlugin {
                     @Override
                     public void onAuthorizationFailure(AuthorizationException exception) {
                         tokensPersistenceManager.persistTokensOnDevice();
-                        callbackContext.error("");
+                        callbackContext.error(exception.toString());
                     }
 
                     @Override
@@ -105,8 +106,17 @@ public class CDVAppId extends CordovaPlugin {
             AppIdAuthorizationListener appIdAuthorizationListener =
                     new AppIdAuthorizationListener(this.cordova.getActivity(), appIDAuthorizationManager, false,callbackContext);
             appId.signinWithResourceOwnerPassword(this.cordova.getActivity(),userName,password,appIdAuthorizationListener);
-             // LoginWidget loginWidget = appId.getLoginWidget();
-            // loginWidget.launch(this.cordova.getActivity(),appIdSampleAuthorizationListener, null);
+        }catch(Exception e){
+            callbackContext.error(e.toString());
+        }
+    }
+
+    private void login(final CallbackContext callbackContext){
+        try{
+            AppIdAuthorizationListener appIdAuthorizationListener =
+                    new AppIdAuthorizationListener(this.cordova.getActivity(), appIDAuthorizationManager, false,callbackContext);
+            LoginWidget loginWidget = appId.getLoginWidget();
+            loginWidget.launch(this.cordova.getActivity(),appIdAuthorizationListener, null);
         }catch(Exception e){
             callbackContext.error(e.toString());
         }

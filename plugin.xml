@@ -14,10 +14,15 @@
     	<name>IBM Cloud Platform - App Id</name>
     	<description>IBM Cloud App ID is a service that lets developers to easily add authentication, authorization and user profile services to apps and APIs running on IBM Cloud.</description>
 
+        <dependency id="cordova-plugin-cocoapod-support"/>
+        <dependency id="cordova-plugin-add-swift-support"/>
+
+        <js-module name="AppId" src="www/APPID.js">
+            <clobbers target="AppId" />
+        </js-module>
+
         <platform name="android">
-            <js-module name="AppId" src="www/APPID.js">
-                <clobbers target="AppId" />
-            </js-module>
+          
             <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
             <framework src="com.squareup.okhttp3:okhttp:3.11.0" />
             <framework src="com.android.support:support-v4:26.0.1" />
@@ -79,10 +84,22 @@
         </platform>
 
         <platform name="ios">
-
+            <pods-config use-frameworks="true" ios-min-version="10.0"/>
+            <pod id="IBMCloudAppID" version="~>4.0"/>
+            <pod id="BMSCore" version="~>2.3.5"/>
+            <config-file parent="/*" target="config.xml">
+                <feature name="AppIdPlugin">
+                    <param name="ios-package" value="CDVAppID" />
+                </feature>
+            </config-file>
+            <preference name="deployment-target" value="10.0" />
+            <source-file src="src/ios/CDVAppID.swift" />
+            <source-file src="src/ios/SigninDelegate.swift" />
+            <source-file src="src/ios/TokenStorage.swift" />
+            <header-file src="src/ios/Bridging-Header.h" />
         </platform>
 
- <platform name="windows">
+   <platform name="windows">
 
     </platform>
     </plugin>

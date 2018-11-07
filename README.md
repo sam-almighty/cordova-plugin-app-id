@@ -10,7 +10,7 @@
    limitations under the License.
 -->
 
-# IBM App Id Cordova Plugin
+# IBM Cloud AppID Cordova Plugin
 
 Cordova Plugin for the IBM Cloud AppID
 

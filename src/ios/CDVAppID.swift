@@ -43,9 +43,12 @@ import IBMCloudAppID
                 let appIdAuthorizationManager = AppIDAuthorizationManager(appid:appid)
                 bmsclient.authorizationManager = appIdAuthorizationManager
                 TokenStorageManager.sharedInstance.initialize(tenantId: backendGUID)
-                let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "")
-                // call success callback
-                self.commandDelegate!.send(pluginResult, callbackId:command.callbackId)
+                let refreshToken = TokenStorageManager.sharedInstance.loadStoredRefreshToken()
+                if (refreshToken != nil) {
+                    AppID.sharedInstance.signinWithRefreshToken(refreshTokenString: refreshToken!, tokenResponseDelegate: SigninDelegate(command, self.commandDelegate))
+                } else {
+                    self.loginWidget(command)
+            }
         })
     }
     

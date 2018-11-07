@@ -69,4 +69,14 @@ import IBMCloudAppID
                 }
                 AppID.sharedInstance.signinWithResourceOwnerPassword(username: username, password: password, tokenResponseDelegate: SigninDelegate(command, self.commandDelegate))
         } ) }
+    
+    
+    /*
+     * Login the SDK using Facebook or Google Accounts
+     */
+    func loginWidget(_ command: CDVInvokedUrlCommand) {
+        self.commandDelegate!.run(inBackground: {
+            let token = TokenStorageManager.sharedInstance.loadStoredToken()
+            AppID.sharedInstance.loginWidget?.launch(accessTokenString: token, delegate:SigninDelegate(command, self.commandDelegate))
+        } ) }
 }

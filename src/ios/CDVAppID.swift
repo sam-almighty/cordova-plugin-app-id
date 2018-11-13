@@ -82,4 +82,8 @@ import IBMCloudAppID
             let token = TokenStorageManager.sharedInstance.loadStoredToken()
             AppID.sharedInstance.loginWidget?.launch(accessTokenString: token, delegate:SigninDelegate(command, self.commandDelegate))
         } ) }
+    
+    func application(_ application: UIApplication,_ open: URL, _ options: [UIApplicationOpenURLOptionsKey : Any])  -> Bool {
+        return AppID.sharedInstance.application(application, open: open, options: options)
+    }
 }

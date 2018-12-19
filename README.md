@@ -30,6 +30,8 @@ Run the following commands to create a new Cordova application. Alternatively yo
 	$ cordova create {appName}
 	$ cd {appName}
 	```
+[My Github](https://github.com/cmatskas" target="_blank)
+
 
 ### Adding Cordova platforms
 
